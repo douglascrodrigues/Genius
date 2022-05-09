@@ -1,68 +1,48 @@
 # Top 10 Músicas mais tocadas por Artista
-Integração com a API do Genius para capturar as top 10 músicas mais tocadas de algum artista.
-Feito com Flask, Redis e DynamoDB.
+Integração com a API do Genius, top 10 músicas mais tocadas de um determinado artista.
+Utilizado Flask RestFull, Redis e DynamoDB.
 
 ### Requisitos:
 - Python 3+
 - Redis Server 3.0
 - DynamoDB Server (ou instância rodando na AWS)
-- Conta no Genius API
-
-### Compatibilidade:
-Linux e Windows
 
 ### Como configurar o ambiente:
-• Renomeie o arquivo ".env.example" para ".env" e configure o mesmo na pasta raíz do projeto, substituindo as seguintes informações:
 
-```
-FLASK_ENV=production
-DEBUG=False
-
-GENIUS_ACCESS_TOKEN=** GENIUS API ACCES TOKEN **
-
-REDIS_HOST=** REDIS HOST ADDRESS **
-REDIS_PORT=** REDIS PORT NUMBER **
-REDIS_DAYS_EXPIRE=7
-
-AWS_ACCESS_KEY_ID=** AWS ACCESS KEY **
-AWS_SECRET_ACCESS_KEY=** AWS SECRET ACCESS KEY **
-```
-
-• Após configurar o arquivo ".env", você precisará instalar os requisitos do projeto com o seguinte comando:
+• Após configurar o arquivo "venv", você precisará instalar os requisitos do projeto com o seguinte comando:
 
 ```pip install -r requirements.txt```
 
 • Pronto! Configurado. Se tudo deu certo nos passos anteriores, agora você só precisa abrir o "Command Prompt" ou "bash" e rodar o seguinte comando na pasta:
-
-```flask run```
+ *Windows
+```python app.py```
 ou simplesmente:
 ```python -m app.py```
 
 ### Como consultar os dados do Artista na API:
 - Você precisa fazer uma requisição com o método "GET" para a url a seguir:
-```http://127.0.0.1:5000/api/v1/get_artist_top_songs/NOME_DO_ARTISTA```
-(substitua NOME_DO_ARTISTA pelo nome do seu artista favorito)
+```http://127.0.0.1:5000/musicas/nome_do_artista```
+Atenção: substitua nome_do_artista pelo nome do seu artista favorito
 
 ### Retorno dos dados da API:
 - Se sua requisição funcionou corretamente, você receberá o seguinte retorno (exemplo):
 
 ```
 {
-  "artist_name": "David Guetta",
-  "message": "Foram encontrados as top 10 musicas deste artista!",
-  "search_term": "David Guetta",
-  "songs_list": [
-    "2U by David Guetta (Ft. Justin Bieber)",
-    "One Last Time by Ariana Grande",
-    "Lovesick Girls by BLACKPINK",
-    "So Far Away by Martin Garrix & David Guetta (Ft. Jamie Scott & Romy Dya)","Titanium by David Guetta (Ft. Sia)",
-    "Hey Mama by David Guetta (Ft. Afrojack, Bebe Rexha & Nicki Minaj)",
-    "Goodbye by Jason Derulo & David Guetta (Ft. Nicki Minaj & Willy William)",
-    "Say My Name by David Guetta, Bebe Rexha & J Balvin",
-    "I Gotta Feeling by Black Eyed Peas",
-    "Flames by David Guetta & Sia"
-  ],
-  "status": "success"
+    "lista_de_musica": [
+        "HUMBLE. by Kendrick Lamar",
+        "Fuckin' Problems by A$AP Rocky (Ft. 2 Chainz, Drake & Kendrick Lamar)",
+        " m.A.A.d city by Kendrick Lamar (Ft. MC Eiht)",
+        "Swimming Pools (Drank) by Kendrick Lamar",
+        "DNA. by Kendrick Lamar",
+        "Money Trees by Kendrick Lamar (Ft. Jay Rock)",
+        "XXX. by Kendrick Lamar (Ft. U2)",
+        " goosebumps by Travis Scott (Ft. Kendrick Lamar)",
+        "Bitch, Don't Kill My Vibe by Kendrick Lamar",
+        "Control by Big Sean (Ft. Jay Electronica & Kendrick Lamar)"
+    ],
+    "nome_artista": "Kendrick Lamar",
+    "pesquisado": "Kendrick Lamar"
 }
 ```
 
@@ -70,15 +50,9 @@ ou simplesmente:
 
 ```
 {
-  "artist_name": null,
-  "message": "O nome pesquisado e invalido! [minimo 3, maximo 30 caracteres]",
-  "search_term": "dv",
-  "songs_list": [
-  ],
-  "status": "error"
+  null
 }
 ```
 
-~ opcionalmente: você pode adicionar no parâmetro da URL a seguinte flag ```?cache=False```, assim evitará de trazer dados em cache ~
-
+![image](https://user-images.githubusercontent.com/38405352/167323876-a4e91e33-4f43-451a-b0db-58bb5b191e0f.png)
 
